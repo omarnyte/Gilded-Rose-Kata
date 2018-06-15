@@ -3,66 +3,26 @@ class GildedRose
 
   def initialize(items)
     @items = items.map do |item|
-      case item.name 
-      when "foo"
-        item = Foo.new(item.sell_in, item.quality)
-      when "Aged Brie"
-        item = Aged_Brie.new(item.sell_in, item.quality)
-      when "Sulfuras, Hand of Ragnaros"
-        item = Sulfuras.new(item.sell_in, item.quality)
-      when "Backstage passes to a TAFKAL80ETC concert"
-        item = Backstage_Pass.new(item.sell_in, item.quality)
-      end 
+      item = klass_for(item.name).new(item.sell_in, item.quality)
     end 
   end
 
+  def klass_for(name)
+    case name 
+    when "foo"
+      Foo
+    when "Aged Brie"
+      Aged_Brie
+    when "Sulfuras, Hand of Ragnaros"
+      Sulfuras
+    when "Backstage passes to a TAFKAL80ETC concert"
+      Backstage_Pass
+    end 
+  end 
+  
   def update_quality()
     @items.each do |item|
       item.update_quality
-
-    #   if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-    #     if item.quality > 0
-    #       if item.name != "Sulfuras, Hand of Ragnaros"
-    #         item.quality = item.quality - 1
-    #       end
-    #     end
-    #   else
-    #     if item.quality < 50
-    #       item.quality = item.quality + 1
-    #       if item.name == "Backstage passes to a TAFKAL80ETC concert"
-    #         if item.sell_in < 11
-    #           if item.quality < 50
-    #             item.quality = item.quality + 1
-    #           end
-    #         end
-    #         if item.sell_in < 6
-    #           if item.quality < 50
-    #             item.quality = item.quality + 1
-    #           end
-    #         end
-    #       end
-    #     end
-    #   end
-    #   if item.name != "Sulfuras, Hand of Ragnaros"
-    #     item.sell_in = item.sell_in - 1
-    #   end
-    #   if item.sell_in < 0
-    #     if item.name != "Aged Brie"
-    #       if item.name != "Backstage passes to a TAFKAL80ETC concert"
-    #         if item.quality > 0
-    #           if item.name != "Sulfuras, Hand of Ragnaros"
-    #             item.quality = item.quality - 1
-    #           end
-    #         end
-    #       else
-    #         item.quality = item.quality - item.quality
-    #       end
-    #     else
-    #       if item.quality < 50
-    #         item.quality = item.quality + 1
-    #       end
-    #     end
-    #   end
     end
   end
 end

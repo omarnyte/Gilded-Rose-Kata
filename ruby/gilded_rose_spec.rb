@@ -5,8 +5,9 @@ describe GildedRose do
   describe "#update_quality" do
     it "does not change the name" do
       items = [Item.new("foo", 0, 0)]
-      GildedRose.new(items).update_quality()
-      expect(items[0].name).to eq "foo"
+      gr = GildedRose.new(items)
+      gr.update_quality
+      expect(gr.items[0].name).to eq "foo"
     end
   end
 
@@ -71,19 +72,19 @@ describe GildedRose do
       items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 6, 10)]
       gr = GildedRose.new(items)
       gr.update_quality
-      expect(items[0].sell_in).to eq(5)
-      expect(items[0].quality).to eq(12)
+      expect(gr.items[0].sell_in).to eq(5)
+      expect(gr.items[0].quality).to eq(12)
 
       gr.update_quality
-      expect(items[0].sell_in).to eq(4)
-      expect(items[0].quality).to eq(15)
+      expect(gr.items[0].sell_in).to eq(4)
+      expect(gr.items[0].quality).to eq(15)
 
       5.times do 
         gr.update_quality
       end 
 
-      expect(items[0].sell_in).to eq(-1)
-      expect(items[0].quality).to eq(0)
+      expect(gr.items[0].sell_in).to eq(-1)
+      expect(gr.items[0].quality).to eq(0)
     end     
   end 
 end

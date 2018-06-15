@@ -88,7 +88,7 @@ describe GildedRose do
     end    
     
     it "degrades 'Conjured' items twice as fast as normal items" do 
-      items = [Item.new("Conjured", 1, 10)]
+      items = [Item.new("Conjured Mana Cake", 1, 10)]
       gr = GildedRose.new(items)
       gr.update_quality
       expect(gr.items[0].sell_in).to eq(0)

@@ -17,7 +17,7 @@ class GildedRose
       Sulfuras
     when "Backstage passes to a TAFKAL80ETC concert"
       Backstage_Pass 
-    when "Conjured"
+    when "Conjured Mana Cake"
       Conjured
     end 
   end 

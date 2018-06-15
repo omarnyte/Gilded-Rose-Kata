@@ -16,7 +16,9 @@ class GildedRose
     when "Sulfuras, Hand of Ragnaros"
       Sulfuras
     when "Backstage passes to a TAFKAL80ETC concert"
-      Backstage_Pass
+      Backstage_Pass 
+    when "Conjured"
+      Conjured
     end 
   end 
   
@@ -54,6 +56,8 @@ end
 class Aged_Brie < Item 
   def update_quality()
     @sell_in -= 1 
+    return if @quality == 0
+
     @quality += 1 if @quality < 50
   end 
 end 
@@ -76,4 +80,14 @@ class Backstage_Pass < Item
       @quality += 2 
     end 
   end 
-end
+end 
+
+class Conjured < Item 
+  def update_quality()
+    @sell_in -= 1 
+    return if @quality == 0
+
+    @quality -= 2 
+    @quality -= 2 if @sell_in < 0
+  end 
+end 

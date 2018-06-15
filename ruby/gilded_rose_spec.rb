@@ -85,6 +85,18 @@ describe GildedRose do
 
       expect(gr.items[0].sell_in).to eq(-1)
       expect(gr.items[0].quality).to eq(0)
-    end     
+    end    
+    
+    it "degrades 'Conjured' items twice as fast as normal items" do 
+      items = [Item.new("Conjured", 1, 10)]
+      gr = GildedRose.new(items)
+      gr.update_quality
+      expect(gr.items[0].sell_in).to eq(0)
+      expect(gr.items[0].quality).to eq(8)
+
+      gr.update_quality
+      expect(gr.items[0].sell_in).to eq(-1)
+      expect(gr.items[0].quality).to eq(4)
+    end 
   end 
 end

@@ -21,44 +21,50 @@ describe GildedRose do
   describe "#update_quality" do
     it "lowers both @sell_in and @quality for every item at the end of each day" do 
       items = [Item.new("foo", 10, 10)]
-      GildedRose.new(items).update_quality
-      expect(items[0].sell_in).to eq(9)
-      expect(items[0].quality).to eq(9)
+      gr = GildedRose.new(items)
+      gr.update_quality
+      expect(gr.items[0].sell_in).to eq(9)
+      expect(gr.items[0].quality).to eq(9)
     end 
 
     it "degreades quality twice as fast once the sell date has passed" do 
       items = [Item.new("foo", 0, 10)]
-      GildedRose.new(items).update_quality
-      expect(items[0].sell_in).to eq(-1)
-      expect(items[0].quality).to eq(8)
+      gr = GildedRose.new(items)
+      gr.update_quality
+      expect(gr.items[0].sell_in).to eq(-1)
+      expect(gr.items[0].quality).to eq(8)
     end 
 
     it "never brings down quality to a negative value" do 
       items = [Item.new("foo", 10, 0)]
-      GildedRose.new(items).update_quality
-      expect(items[0].sell_in).to eq(9)
-      expect(items[0].quality).to eq(0)
+      gr = GildedRose.new(items)
+      gr.update_quality
+      expect(gr.items[0].sell_in).to eq(9)
+      expect(gr.items[0].quality).to eq(0)
     end 
 
     it "increases the quality of 'Aged Brie' the older it gets" do 
       items = [Item.new("Aged Brie", 10, 10)]
-      GildedRose.new(items).update_quality
-      expect(items[0].sell_in).to eq(9)
-      expect(items[0].quality).to eq(11)
+      gr = GildedRose.new(items)
+      gr.update_quality
+      expect(gr.items[0].sell_in).to eq(9)
+      expect(gr.items[0].quality).to eq(11)
     end 
 
     it "never incrases the quality of an item to be more than 50" do 
       items = [Item.new("Aged Brie", 10, 50)]
-      GildedRose.new(items).update_quality
-      expect(items[0].sell_in).to eq(9)
-      expect(items[0].quality).to eq(50)
+      gr = GildedRose.new(items)
+      gr.update_quality
+      expect(gr.items[0].sell_in).to eq(9)
+      expect(gr.items[0].quality).to eq(50)
     end 
 
     it "never decereases @sell_in or @quality for 'Sulfuras'" do 
       items = [Item.new("Sulfuras, Hand of Ragnaros", 10, 80)]
-      GildedRose.new(items).update_quality
-      expect(items[0].sell_in).to eq(10)
-      expect(items[0].quality).to eq(80)
+      gr = GildedRose.new(items)
+      gr.update_quality
+      expect(gr.items[0].sell_in).to eq(10)
+      expect(gr.items[0].quality).to eq(80)
     end 
 
     it "handles the incrase of 'Backstage passes to a TAFKAL80ETC concert'" do 
